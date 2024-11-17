@@ -10,6 +10,7 @@ void addRec(string ipAdd);
 void delRec(string ipAdd);
 void viewRec(string ipAdd);
 void editRec(string ipAdd);
+void viewSort(string ipAdd);
 MYSQL* connect(string ipAdd);
 int main()
 {
@@ -71,6 +72,9 @@ int main()
             system("cls");
             break;
         case 4:
+            viewSort(ipAdd);
+            system("pause");
+            system("cls");
             break;
         case 5:
             viewRec(ipAdd);
@@ -169,7 +173,7 @@ void delRec(string ipAdd)
 
     if(checkCon)
     {
-        viewRec(ipAdd);
+        viewSort(ipAdd);
         string studentID;
 
         cout<<"\n Enter StudentId to delete: ";
@@ -237,6 +241,27 @@ void editRec(string ipAdd)
             cout<<"CHANGES MADE..."<<endl;
         else
             cout<<"FAILED TO CHANGE DATA..."<<endl;
+    }
+    else
+        cout<<"FAILED TO ESTABLISH DATA...";
+}
+void viewSort(string ipAdd)
+{
+    MYSQL *checkCon = connect(ipAdd);
+    MYSQL_ROW row;
+    MYSQL_RES* res;
+
+    if(checkCon)
+    {
+        int qstate = mysql_query(checkCon, "SELECT studentID, firstname, surname, birthdate, gender, address FROM student ORDER BY surname");
+
+        if(!qstate)
+        {
+            res = mysql_store_result(checkCon);
+
+            while((row = mysql_fetch_row(res)))
+                cout<<setw(10)<<left<<row[0]<<" | "<<setw(15)<<left<<row[1]<<" | "<<setw(15)<<left<<row[2]<<" |   "<<setw(10)<<left<<row[3]<<" |  "<<setw(2)<<left<<row[4]<<" | "<<setw(15)<<left<<row[5]<<endl;
+        }
     }
     else
         cout<<"FAILED TO ESTABLISH DATA...";
