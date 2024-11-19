@@ -3,6 +3,8 @@
 #include <mysql.h>
 #include <iomanip>
 #include <sstream>
+#include <ctype.h>
+#include <string>
 
 using namespace std;
 
@@ -121,14 +123,30 @@ void addRec(string ipAdd)
         cout << "Enter Firstname: ";
         getline(cin, firstname);
 
-        cout << "Enter Birthdate: ";
+        cout << "Enter Birthdate(XX-XX-XXXX): ";
         getline(cin, birthdate);
 
-        cout << "Enter Address: ";
+        cout << "Enter Address(Baranggay, Town, Province): ";
         getline(cin, address);
 
         cout << "Enter Gender(M/F): ";
         cin >> gender;
+
+        if(studentID.length() > 11 || studentID.length() < 11)
+        {
+            cout<<"Record failed to insert. Invalid input on Student Id.";
+            return;
+        }
+        else if(birthdate.length() > 10 || birthdate.length() < 10)
+        {
+            cout<<"Record failed to insert. Invalid input on Birthdate."
+            return;
+        }
+        else if(gender.length() > 1 || gender.length() < 1)
+        {
+            cout<<"Record failed to insert. Invalid input on Gender";
+            return;
+        }
 
         stringstream ss;
 
@@ -147,7 +165,7 @@ void addRec(string ipAdd)
             cout<<"FAILED TO INSERT..."<<endl;
     }
     else
-        cout<<"FAILED TO ESTABLISH CONNECTION";
+        cout<<"FAILED TO ESTABLISH CONNECTION...";
 }
 void viewRec(string ipAdd)
 {
