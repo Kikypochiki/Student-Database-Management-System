@@ -52,7 +52,7 @@ int main()
     {
         int choice;
 
-        cout<<"STUDENT MANAGEMENT SYSTEM"<<endl<<"[1]ADD"<<endl<<"[2]DELETE"<<endl<<"[3]EDIT"<<endl<<"[4]VIEW SORTED"<<endl<<"[5]VIEW"<<endl<<"[6]EXIT"<<endl;
+        cout<<"STUDENT MANAGEMENT SYSTEM"<<endl<<"[1]ADD"<<endl<<"[2]DELETE"<<endl<<"[3]EDIT"<<endl<<"[4]VIEW"<<endl<<"[5]EXIT"<<endl;
 
         cin>>choice;
 
@@ -74,16 +74,11 @@ int main()
             system("cls");
             break;
         case 4:
-            viewSort(ipAdd);
-            system("pause");
-            system("cls");
-            break;
-        case 5:
             viewRec(ipAdd);
             system("pause");
             system("cls");
             break;
-        case 6:
+        case 5:
             checkRun = 1;
             break;
         default:
@@ -113,7 +108,7 @@ void addRec(string ipAdd)
         string studentID, surname, firstname, birthdate, address, gender;
         int qstate = 0;
 
-        cout << "Enter Student Id(XX-XX-XXXXX): ";
+        cout << "Enter Student Id(XX-X-XXXXX): ";
         cin >> studentID;
 
         cout << "Enter Surname: ";
@@ -123,7 +118,7 @@ void addRec(string ipAdd)
         cout << "Enter Firstname: ";
         getline(cin, firstname);
 
-        cout << "Enter Birthdate(XX-XX-XXXX): ";
+        cout << "Enter Birthdate(MM-DD-YYYY): ";
         getline(cin, birthdate);
 
         cout << "Enter Address(Baranggay, Town, Province): ";
@@ -132,7 +127,7 @@ void addRec(string ipAdd)
         cout << "Enter Gender(M/F): ";
         cin >> gender;
 
-        if(studentID.length() > 11 || studentID.length() < 11)
+        if(studentID.length() > 10 || studentID.length() < 10)
         {
             cout<<"Record failed to insert. Invalid input on Student Id.\n";
             return;
@@ -160,18 +155,20 @@ void addRec(string ipAdd)
         cout<<endl;
 
         if(qstate == 0)
-            cout<<"RECORD INSERTED..."<<endl;
+            cout<<"RECORD INSERTED...\n"<<endl;
         else
-            cout<<"FAILED TO INSERT..."<<endl;
+            cout<<"FAILED TO INSERT...\n"<<endl;
     }
     else
-        cout<<"FAILED TO ESTABLISH CONNECTION...";
+        cout<<"FAILED TO ESTABLISH CONNECTION...\n";
 }
 void viewRec(string ipAdd)
 {
     MYSQL* checkCon = connect(ipAdd);
     MYSQL_ROW row;
     MYSQL_RES* res;
+    char ans;
+
     if(checkCon)
     {
         int qstate = mysql_query(checkCon, "SELECT studentID, firstname, surname, birthdate, gender, address FROM student");
@@ -182,6 +179,14 @@ void viewRec(string ipAdd)
 
             while((row = mysql_fetch_row(res)))
                 cout<<setw(10)<<left<<row[0]<<" | "<<setw(15)<<left<<row[1]<<" | "<<setw(15)<<left<<row[2]<<" |   "<<setw(10)<<left<<row[3]<<" |  "<<setw(2)<<left<<row[4]<<" | "<<setw(15)<<left<<row[5]<<endl;
+        }
+        cout<<"\nDo you wish to sort data? (y/n): ";
+        cin>>ans;
+
+        if(ans == 'y')
+        {
+            system("cls");
+            viewSort(ipAdd);
         }
     }
 }
@@ -206,12 +211,12 @@ void delRec(string ipAdd)
         int qstate = mysql_query(checkCon,q);
 
         if(qstate == 0)
-            cout<<"ROW DELETED...";
+            cout<<"ROW DELETED...\n";
         else
-            cout<<"ROW FAILED TO DELETE...";
+            cout<<"ROW FAILED TO DELETE...\n";
     }
     else
-        cout<<"FAILED TO ESTABLISH CONNECTION";
+        cout<<"FAILED TO ESTABLISH CONNECTION...\n";
 }
 void editRec(string ipAdd)
 {
@@ -256,12 +261,12 @@ void editRec(string ipAdd)
         cout<<endl;
 
         if(qstate == 0)
-            cout<<"CHANGES MADE..."<<endl;
+            cout<<"CHANGES MADE...\n"<<endl;
         else
-            cout<<"FAILED TO CHANGE DATA..."<<endl;
+            cout<<"FAILED TO CHANGE DATA...\n"<<endl;
     }
     else
-        cout<<"FAILED TO ESTABLISH DATA...";
+        cout<<"FAILED TO ESTABLISH DATA...\n";
 }
 void viewSort(string ipAdd)
 {
@@ -282,5 +287,5 @@ void viewSort(string ipAdd)
         }
     }
     else
-        cout<<"FAILED TO ESTABLISH DATA...";
+        cout<<"FAILED TO ESTABLISH DATA...\n";
 }
