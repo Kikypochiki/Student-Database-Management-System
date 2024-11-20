@@ -1,10 +1,12 @@
 # depslib dependency file v1.0
-1732019720 source:c:\users\dohnm\onedrive\documents\school\2nd year\1st sem\fds\varquez database management system\dbms\main.cpp
+1732085173 source:c:\users\dohnm\onedrive\documents\school\2nd year\1st sem\fds\varquez database management system\dbms\main.cpp
 	<iostream>
 	<windows.h>
 	<mysql.h>
 	<iomanip>
 	<sstream>
+	<ctype.h>
+	<string>
 
 1730914957 c:\program files (x86)\dev-cpp\mingw64\include\mysql.h
 	<sys/types.h>
@@ -363,4 +365,8 @@
 1731774687 c:\mingw\include\my_list.h
 
 1731774687 c:\mingw\include\my_alloc.h
+
+1512590989 c:\mingw\include\ctype.h
+	<_mingw.h>
+	"wctype.h"
 

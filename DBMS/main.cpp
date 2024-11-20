@@ -134,17 +134,17 @@ void addRec(string ipAdd)
 
         if(studentID.length() > 11 || studentID.length() < 11)
         {
-            cout<<"Record failed to insert. Invalid input on Student Id.";
+            cout<<"Record failed to insert. Invalid input on Student Id.\n";
             return;
         }
         else if(birthdate.length() > 10 || birthdate.length() < 10)
         {
-            cout<<"Record failed to insert. Invalid input on Birthdate."
+            cout<<"Record failed to insert. Invalid input on Birthdate.\n";
             return;
         }
         else if(gender.length() > 1 || gender.length() < 1)
         {
-            cout<<"Record failed to insert. Invalid input on Gender";
+            cout<<"Record failed to insert. Invalid input on Gender.\n";
             return;
         }
 
